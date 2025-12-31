@@ -1,6 +1,4 @@
 import { movieAPi, Results } from "@/app/components/Movies";
-import { Header } from "@/app/Header";
-import { Footer } from "@/app/Footer";
 
 export default async function category({
   params,
@@ -20,8 +18,6 @@ export default async function category({
   return (
     <div className="flex justify-center ">
       <div className="w-360 justify-center items-center">
-        <Header />
-
         <div className="flex flex-col gap-8 px-20 py-13">
           <p className="text-[24px] font-semibold">{title}</p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-5 md:gap-8">
@@ -51,7 +47,6 @@ export default async function category({
             })}
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   );

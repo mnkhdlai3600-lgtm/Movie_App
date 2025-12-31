@@ -1,9 +1,8 @@
 import { Film, Moon, Search, ChevronDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Upcoming } from "./components/Upcoming";
-import Home from "./page";
+import { InputValue } from "./inputSearch/[inputValue]/InputValue";
+import { MovieGenre } from "./genres/[genresCategory]/ShadCNBut";
 
 export const Header = () => {
   return (
@@ -16,13 +15,11 @@ export const Header = () => {
         </div>
       </Link>
       <div className="hidden md:flex gap-3">
-        <Button
-          variant={"outline"}
-          className="bg-white text-black border-gray-300"
-        >
-          <ChevronDown /> Genre
-        </Button>
-        <Input className="w-94.75  border-gray-300"></Input>
+        <MovieGenre />
+
+        <div>
+          <InputValue />
+        </div>
       </div>
       <div className="flex gap-3">
         {" "}

@@ -28,11 +28,11 @@ export const Upcoming = ({
               >
                 <img
                   className="object-cover object-center md:min-h-85 min-h-58.5"
-                  src={` https://image.tmdb.org/t/p/original${films.backdrop_path}`}
+                  src={` https://image.tmdb.org/t/p/original${films.poster_path}`}
                 />
                 <div className="bg-gray-200 h-19 md:h-22.5 p-2">
                   <div className="flex">
-                    <p className="text-[12px] md:text-[14px] flex items-center]">
+                    <p className="text-[12px] md:text-[14px] flex items-center">
                       ⭐️{films.vote_average}
                     </p>
                     <p className="opacity-50 text-[12px] flex items-center">
