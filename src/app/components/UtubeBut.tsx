@@ -12,8 +12,6 @@ import {
 import { fetcherInput } from "@/utils/fetcherInput";
 import { Play } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { resume } from "react-dom/server";
 import YouTube from "react-youtube";
 import useSWR from "swr";
 
@@ -34,6 +32,11 @@ export function UtubeBut({ movieId }: UtubeButProps) {
   const opts = {
     height: "561",
     width: "1000",
+    playerVars: { autoplay: 1 },
+  };
+  const optsRes = {
+    height: "211",
+    width: "100%",
     playerVars: { autoplay: 1 },
   };
 
@@ -71,7 +74,14 @@ export function UtubeBut({ movieId }: UtubeButProps) {
       <DialogContent className="md:min-w-250 md:min-h-140.25 w-full h-50 border-none p-0 ">
         <DialogTitle></DialogTitle>
         {trailerKey ? (
-          <YouTube className="w-full h-full" videoId={trailerKey} opts={opts} />
+          <>
+            <div className="hidden md:block">
+              <YouTube videoId={trailerKey} opts={opts} className="w-full" />
+            </div>
+            <div className="block md:hidden">
+              <YouTube videoId={trailerKey} opts={optsRes} className="w-full" />
+            </div>
+          </>
         ) : (
           <p>No trailer available</p>
         )}

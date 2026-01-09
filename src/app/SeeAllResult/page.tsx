@@ -5,8 +5,9 @@ import { ChangeEvent, useState } from "react";
 import useSWR from "swr";
 import { Movie } from "../components/Movies";
 import { useRouter, useSearchParams } from "next/navigation";
-import { GenreBUt } from "../components/GenreBUt";
+
 import Link from "next/link";
+import GenreBut from "../components/GenreBUt";
 
 export default function MovieResults() {
   const { push } = useRouter();
@@ -60,7 +61,7 @@ export default function MovieResults() {
           </div>
         </div>
         <div className="border-l-2 border-gray-100 "></div>
-        <GenreBUt />
+        <GenreBut />
       </div>
     </div>
   );

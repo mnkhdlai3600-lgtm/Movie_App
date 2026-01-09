@@ -13,7 +13,7 @@ export const Header = () => {
   return (
     <div>
       <div
-        className={`flex justify-between items-center px-5 py-4.75 md:px-20 md:py-2.75 ${
+        className={`flex justify-between items-center px-5 py-4.75 md:px-40 md:py-2.75 ${
           openInput ? "hidden" : "block"
         }`}
       >

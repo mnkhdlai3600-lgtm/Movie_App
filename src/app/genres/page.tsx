@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { Movie } from "../components/Movies";
 import Link from "next/link";
-import { GenreBUt } from "../components/GenreBUt";
+import GenreBut from "../components/GenreBut";
 
 export default function page() {
   const searchParams = useSearchParams();
@@ -15,13 +15,13 @@ export default function page() {
     fetcherInput
   );
   const genreData = data?.results || [];
-  console.log(genreData);
+  console.log(data);
 
   return (
     <div className="flex flex-col gap-8 justify-center  md:mx-20 md:mt-13 md:mb-10 m-5 md:flex-row">
       <div className="shrink-0 ">
         <h1 className="font-semibold text-3xl">Search results</h1>
-        <GenreBUt />
+        <GenreBut />
       </div>
       <div className="border border-gray-300 md:block hidden"></div>
       <div className="flex flex-col gap-8 ">

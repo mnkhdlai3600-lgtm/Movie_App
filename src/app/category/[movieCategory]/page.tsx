@@ -1,15 +1,21 @@
 import { Results } from "@/app/components/Movies";
+import { DynamicPagination } from "@/app/components/PageInation";
+
 import { movieAPI } from "@/app/page";
 import Link from "next/link";
 
 export default async function category({
   params,
+  searchParams,
 }: {
   params: Promise<{ movieCategory: string }>;
+  searchParams: Promise<{ page: string }>;
 }) {
   const { movieCategory } = await params;
+  const currentPage = (await searchParams).page;
 
-  const movies: Results = await movieAPI(movieCategory);
+  const movies: Results = await movieAPI(movieCategory, currentPage);
+  console.log(movies?.total_pages);
 
   const title = movieCategory.includes("popular")
     ? "Popular"
@@ -21,7 +27,7 @@ export default async function category({
     <div className="p-5 md:px-20 mb-12.5 gap-8 flex flex-col">
       <p className="text-[24px] font-semibold">{title}</p>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-5 md:gap-8">
-        {movies.results.slice(0, 10).map((films) => {
+        {movies.results.map((films) => {
           return (
             <Link
               href={`/movieDetail?query=${films.id}`}
@@ -47,6 +53,7 @@ export default async function category({
           );
         })}
       </div>
+      <DynamicPagination />
     </div>
   );
 }

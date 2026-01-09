@@ -6,9 +6,9 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const movieAPI = async (category: string) => {
+export const movieAPI = async (category: string, page: string = "1") => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${category}`,
+    `https://api.themoviedb.org/3/movie/${category}?page=${page}`,
     {
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Movie } from "./Movies";
 import { ArrowRight } from "lucide-react";
-import { UtubeBut } from "./UtubeBut";
 
 export const Upcoming = ({
   title,
@@ -13,7 +12,7 @@ export const Upcoming = ({
   category: string;
 }) => {
   return (
-    <div className="p-5 md:px-20 mb-12.5 gap-8 flex flex-col">
+    <div className="p-5 mb-12.5 gap-8 flex flex-col">
       <div className="flex justify-between">
         <p className="text-[24px] font-semibold">{title}:</p>
         <Link href={`/category/${category}`}>

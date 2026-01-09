@@ -98,7 +98,7 @@ export const CarouselPlugin = ({ results }: CarouselPluginProps) => {
                   </p>
                 </div>
               </Link>
-              <div className="md:absolute z-50 top-[55%] left-[8%] static mx-5">
+              <div className="md:absolute z-50 md:top-[55%] md:left-[8%] static mx-5 flex justify-start items-end">
                 <UtubeBut movieId={movie.id} />
               </div>
             </CarouselItem>
