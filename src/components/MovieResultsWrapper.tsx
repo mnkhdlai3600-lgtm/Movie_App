@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { fetcherInput } from "@/utils/fetcherInput";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
@@ -7,6 +8,8 @@ import { Movie } from "./Movies";
 import { DynamicPagination } from "./PageInation";
 import GenreBut from "./GenreBut";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import MovieResultBut from "./MovieResultBut";
 
 export function MovieResultsWrapper() {
   const searchParams = useSearchParams();
@@ -24,16 +27,27 @@ export function MovieResultsWrapper() {
   const searchData = data?.results || [];
   const totalPages = Math.min(data?.total_pages || 1, 10);
 
+  // 👉 НЭМЭГДСЭН: genre state
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+
+  // 👉 НЭМЭГДСЭН: genre-аар filter
+  const filteredMovies =
+    selectedGenres.length === 0
+      ? searchData
+      : searchData.filter((movie: Movie) =>
+          movie.genre_ids?.some((id) => selectedGenres.includes(id))
+        );
+
   return (
     <div className="flex gap-8 justify-center md:mx-20 mx-5 mb-8 min-h-screen">
       <div className="flex-1 flex flex-col gap-8">
         <h1 className="font-semibold text-3xl">Search results</h1>
 
         <p className="font-semibold text-[20px]">
-          {searchData.length} results for "{searchValueFromUrl}"
+          {filteredMovies.length} results for "{searchValueFromUrl}"
         </p>
 
-        {searchData.length === 0 ? (
+        {filteredMovies.length === 0 ? (
           <div>
             <div className="border border-gray-200 rounded-lg h-40 w-202 flex justify-center items-center">
               <p className="text-gray-400">No results found.</p>
@@ -42,7 +56,7 @@ export function MovieResultsWrapper() {
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
-            {searchData.map((films: Movie) => (
+            {filteredMovies.map((films: Movie) => (
               <Link key={films.id} href={`/movieDetail?query=${films.id}`}>
                 <div className="rounded-lg overflow-hidden shadow-lg">
                   <img
@@ -72,8 +86,11 @@ export function MovieResultsWrapper() {
 
       <div className="border-l-2 border-gray-100 shrink-0" />
 
-      <div className="shrink-0">
-        <GenreBut />
+      <div className="">
+        <MovieResultBut
+          selectedGenres={selectedGenres}
+          onChange={setSelectedGenres}
+        />
       </div>
     </div>
   );
