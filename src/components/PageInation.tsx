@@ -1,5 +1,6 @@
 "use client";
 
+import { usePaginationHook } from "@/app/_hook/usePaginationHook";
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +10,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { usePaginationHook } from "../_hook/usePaginationHook";
+
 import { cn } from "@/lib/utils";
 
 export function DynamicPagination() {

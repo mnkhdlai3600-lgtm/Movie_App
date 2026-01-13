@@ -1,11 +1,11 @@
 "use client";
 
-import { Movie } from "@/app/components/Movies";
 import { fetcherInput } from "@/utils/fetcherInput";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
+import { Movie } from "./Movies";
 
 export default function Similiar() {
   const searchParams = useSearchParams();
@@ -21,7 +21,7 @@ export default function Similiar() {
       <div className="flex justify-between">
         <strong className="text-2xl">More like this</strong>
         <Link
-          href={`/MoreLikeThis?query=${movieId}`}
+          href={`/moreLikeThis?query=${movieId}`}
           className="flex gap-2 justify-center items-center"
         >
           See more <ArrowRight className="w-4 h-4" />

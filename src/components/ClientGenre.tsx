@@ -4,21 +4,37 @@ import { fetcherInput } from "@/utils/fetcherInput";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import Link from "next/link";
-import GenreBut from "@/app/components/GenreBut";
-import { Movie } from "@/app/components/Movies";
+import GenreBut, { Genre } from "./GenreBut";
+import { Movie } from "./Movies";
+import { DynamicPagination } from "./PageInation";
 
 export default function GenreMoviesWrapper() {
   const searchParams = useSearchParams();
   const genreIds = searchParams.get("genre");
+  const currentPage = Number(searchParams.get("page") ?? "1");
 
   const { data, isLoading, error } = useSWR(
     genreIds
-      ? `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/discover/movie?language=en&with_genres=${genreIds}&page=1`
+      ? `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/discover/movie?language=en&with_genres=${genreIds}&page=${currentPage}`
       : null,
     fetcherInput
   );
 
   const genreData = data?.results || [];
+
+  const { data: dataGenre } = useSWR<{ genres: Genre[] }>(
+    `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/genre/movie/list?language=en`,
+    fetcherInput
+  );
+
+  const genreIdsFromQuery = genreIds?.split(",").map((id) => Number(id)) || [];
+
+  const matchedGenreNames =
+    dataGenre?.genres
+      .filter((genre) => genreIdsFromQuery.includes(genre.id))
+      .map((genre) => genre.name) || [];
+
+  const result = matchedGenreNames.map((name) => `"${name}"`).join(" ");
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading movies</p>;
@@ -31,7 +47,12 @@ export default function GenreMoviesWrapper() {
       </div>
       <div className="border border-gray-300 md:block hidden"></div>
       <div className="flex flex-col gap-8">
-        <div>
+        <div className="flex flex-col gap-8">
+          <p className="flex gap-2 font-semibold text-[20px]">
+            <span>{genreData.length}</span>
+            titles in
+            {result}
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
             {genreData.map((films: Movie) => (
               <Link key={films.id} href={`/movieDetail?query=${films.id}`}>
@@ -56,6 +77,7 @@ export default function GenreMoviesWrapper() {
               </Link>
             ))}
           </div>
+          <DynamicPagination />
         </div>
       </div>
     </div>

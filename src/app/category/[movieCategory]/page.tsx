@@ -1,7 +1,6 @@
-import { Results } from "@/app/components/Movies";
-import { DynamicPagination } from "@/app/components/PageInation";
-
 import { movieAPI } from "@/app/page";
+import { Results } from "@/components/Movies";
+import { DynamicPagination } from "@/components/PageInation";
 import Link from "next/link";
 
 export default async function category({
@@ -35,8 +34,8 @@ export default async function category({
               className="rounded-lg overflow-hidden shadow-lg "
             >
               <img
-                className="object-cover object-center md:min-h-85 min-h-58.5"
-                src={` https://image.tmdb.org/t/p/original${films.backdrop_path}`}
+                className="object-cover object-center"
+                src={` https://image.tmdb.org/t/p/original${films.poster_path}`}
               />
               <div className="bg-gray-200 h-19 md:h-22.5 p-2">
                 <div className="flex">

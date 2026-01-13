@@ -1,15 +1,14 @@
 "use client";
 
 import { fetcherInput } from "@/utils/fetcherInput";
+import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Movie } from "./Movies";
+import { DynamicPagination } from "./PageInation";
+import GenreBut from "./GenreBut";
 import Link from "next/link";
-import { Movie } from "@/app/components/Movies";
-import { DynamicPagination } from "@/app/components/PageInation";
-import GenreBut from "@/app/components/GenreBut";
 
-export default function MovieResultsWrapper() {
-  const router = useRouter();
+export function MovieResultsWrapper() {
   const searchParams = useSearchParams();
 
   const searchValueFromUrl = searchParams.get("searchValue") || "";
@@ -25,12 +24,6 @@ export default function MovieResultsWrapper() {
   const searchData = data?.results || [];
   const totalPages = Math.min(data?.total_pages || 1, 10);
 
-  const handlePageChange = (pageNumber: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", pageNumber.toString());
-    router.push(`${window.location.pathname}?${params.toString()}`);
-  };
-
   return (
     <div className="flex gap-8 justify-center md:mx-20 mx-5 mb-8 min-h-screen">
       <div className="flex-1 flex flex-col gap-8">
@@ -41,8 +34,11 @@ export default function MovieResultsWrapper() {
         </p>
 
         {searchData.length === 0 ? (
-          <div className="border border-gray-200 rounded-lg w-202 flex justify-center items-center">
-            <p className="text-gray-400">No results found.</p>
+          <div>
+            <div className="border border-gray-200 rounded-lg h-40 w-202 flex justify-center items-center">
+              <p className="text-gray-400">No results found.</p>
+            </div>
+            <DynamicPagination />
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">

@@ -1,7 +1,7 @@
 "use client";
 
+import { MovieResultsWrapper } from "@/components/MovieResultsWrapper";
 import { Suspense } from "react";
-import MovieResultsWrapper from "./components/MovieResultsWrapper";
 
 export default function Page() {
   return (

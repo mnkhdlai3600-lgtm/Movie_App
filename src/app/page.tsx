@@ -1,5 +1,5 @@
+import { Movies } from "@/components/Movies";
 import { Inter } from "next/font/google";
-import { Movies } from "./components/Movies";
 
 const inter = Inter({
   subsets: ["latin"],

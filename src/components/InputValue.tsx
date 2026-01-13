@@ -1,11 +1,12 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { Movie } from "@/app/components/Movies";
+
 import { fetcherInput } from "@/utils/fetcherInput";
 import { ChangeEvent, useState } from "react";
 import useSWR from "swr";
 import { ArrowRight, Loader2Icon, X } from "lucide-react";
 import Link from "next/link";
+import { Movie } from "./Movies";
 
 export const InputValue = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -80,7 +81,7 @@ export const InputValue = () => {
                 ))
                 .slice(0, 5)}
               <Link
-                href={`/SeeAllResult?searchValue=${searchValue}`}
+                href={`/seeAllResult?searchValue=${searchValue}`}
                 onClick={() => setSearchValue("")}
               >
                 <div>See all results for "{searchValue}"</div>
@@ -90,7 +91,7 @@ export const InputValue = () => {
             <div className="flex flex-col gap-8">
               <p className="flex justify-center">No results found. </p>
               <Link
-                href={`/SeeAllResult?searchValue=${searchValue}`}
+                href={`/seeAllResult?searchValue=${searchValue}`}
                 onClick={() => setSearchValue("")}
               >
                 <div>See all results for "{searchValue}"</div>

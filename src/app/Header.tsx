@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Film, Moon, Search, X } from "lucide-react";
-import { InputValue } from "./components/InputValue";
-import { MovieGenre } from "./components/ShadCNBut";
+import { MovieGenre } from "@/components/ShadCNBut";
+import { InputValue } from "@/components/InputValue";
 
 export const Header = () => {
   const [openInput, setOpenInput] = useState(false);

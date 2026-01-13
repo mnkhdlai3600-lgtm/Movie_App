@@ -3,9 +3,9 @@ import { fetcherInput } from "@/utils/fetcherInput";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
+import { UtubeBut } from "./UtubeBut";
 import MovieTeams from "./MovieTeams";
 import Similiar from "./Similiar";
-import { UtubeBut } from "@/app/components/UtubeBut";
 
 export default function RespoDetail() {
   const searchParams = useSearchParams();

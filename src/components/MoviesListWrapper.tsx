@@ -4,8 +4,8 @@ import { fetcherInput } from "@/utils/fetcherInput";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import Link from "next/link";
-import { Movie } from "@/app/components/Movies";
-import { DynamicPagination } from "@/app/components/PageInation";
+import { Movie } from "./Movies";
+import { DynamicPagination } from "./PageInation";
 
 export default function MoviesListWrapper() {
   const searchParams = useSearchParams();

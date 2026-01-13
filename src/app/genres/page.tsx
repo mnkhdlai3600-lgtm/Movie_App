@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import GenreMoviesWrapper from "./components/ClientGenre";
+import GenreMoviesWrapper from "../../components/ClientGenre";
 
 export default function Page() {
   return (
